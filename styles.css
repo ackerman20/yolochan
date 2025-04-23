@@ -1,0 +1,66 @@
+body {
+    text-align: center;
+}
+#container {
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#left-column {
+    max-width: 70%; /* 調整占比 */
+    text-align: center;
+}
+#left-column img {
+    height: 850px;
+    width: auto;
+}
+#right-column {
+    max-width: 25%; 
+}
+#chat-box {
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 5px;
+}
+#message {
+    max-width: 80%;
+    text-align: left;
+    height: 50px;
+    font-size: 25px;
+    left: 0px;
+}
+#btn {
+    height: 50px;
+    font-size: 25px;
+}
+#right-column p {
+    text-align: left;
+    margin-left: 20px;
+    font-size: 30px;
+}
+
+@media (max-width: 800px) {
+    #container {
+        flex-direction: column; /* 寬度低於時切換為上下布局 */
+    }
+    #left-column {
+        max-width: 100%;
+    }
+    #right-column {
+        max-width: 100%;
+        margin-top: -125px;
+    }
+    #left-column img {
+        max-width: 100%;
+        height: auto;
+        
+    }
+    #chat-box {
+        max-width: 100%;
+    }
+    #right-column p {
+        font-size: 30px;
+    }
+}
