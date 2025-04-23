@@ -3,12 +3,12 @@
 <head>
   <title>悠鹿醬</title>
 	<meta name="title" content="悠鹿醬唱歌">
-	<meta name="description" content="專題展AI">
+	<meta name="description" content="展現唱歌">
   <meta property="og:url" content="https://ackerman20.github.io/yolochan/index.html" />
 	<meta property="og:image" content="https://ackerman20.github.io/yolochan/assets/image/yolochan.png" />
   <link rel="stylesheet" type="text/css" href="styles.css">
   <meta charset="UTF-8">
-  <title>展覽 AI 導覽</title>
+  <title>專題展 AI 導覽</title>
 </head>
 <body>
   <div id="container" class="flex-container">
@@ -17,10 +17,10 @@
     </div>
     <div id="right-column">
         <div id="chat-box">
-            <input type="text" id="message" placeholder="輸入第某組介紹專題內容">
+            <input type="text" id="message" placeholder="可以直接輸入第某組">
             <button id="btn" onclick="askAI()">傳送</button>
         </div>
-        <p id="response">我是這次專題展的展場AI，我叫悠鹿醬，悠鹿醬可以提供各組專題的資訊，請指定第幾組來？</p>
+        <p id="response">我是這次專題展的展場AI，我叫悠鹿醬，悠鹿醬可以提供各組專題的資訊，請指定組別？</p>
     </div>
     </div>
     <audio id="myAudio"></audio>
@@ -28,7 +28,7 @@
   <script>
     async function askAI() {
       const message = document.getElementById("message").value;
-      document.getElementById("response").textContent = "⏳ 讓我思考一下...\n";
+      document.getElementById("response").textContent = "⏳ 我需要20秒左右的時間思考...\n";
       const res = await fetch("https://a2f2-118-163-223-51.ngrok-free.app/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -37,6 +37,17 @@
       const data = await res.json();
       document.getElementById("response").textContent = data.reply;
     };
+    function typeText(text, element, index) {
+        if (index < text.length) {
+            element.textContent = text.substring(0, index) + "█";
+            var randomDelay = Math.floor(Math.random() * 300);
+            setTimeout(function() {
+                typeText(text, element, index + 1);
+            }, randomDelay);
+        } else {
+            element.textContent = text;
+        }
+    }
     var image = document.querySelector("#left-column img");
     image.addEventListener("click", function () {
         var responseText = document.getElementById("response");
