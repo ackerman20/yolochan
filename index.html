@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>展覽 AI 導覽</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    #response { margin-top: 20px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <img src="assets/photo (1).png" width="100%" alt="AI 導覽員">
+  <input id="question" type="text" style="max-width: 80%;">
+  <button style="max-width: 20%;" onclick="askAI()">送出</button>
+  <p id="response">我是這次專題展的展場AI，我可以提供各組專題的資訊，請指定第幾組來？</p>
+
+  <script>
+    async function askAI() {
+      const question = document.getElementById("question").value;
+      document.getElementById("response").textContent = "⏳ 讓我思考一下...\n";
+      const res = await fetch(" https://04a2-118-163-223-51.ngrok-free.app/ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question })
+      });
+      const data = await res.json();
+      document.getElementById("response").textContent = data.reply;
+    }
+  </script>
+</body>
+</html>
