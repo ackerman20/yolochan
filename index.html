@@ -1,31 +1,56 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+  <title>悠鹿醬</title>
+	<meta name="title" content="悠鹿醬唱歌">
+	<meta name="description" content="展現唱歌">
+  <meta property="og:url" content="https://ackerman20.github.io/yolochan/index.html" />
+	<meta property="og:image" content="https://ackerman20.github.io/yolochan/assets/image/yolochan.png" />
+  <link rel="stylesheet" type="text/css" href="styles.css">
   <meta charset="UTF-8">
   <title>展覽 AI 導覽</title>
-  <style>
-    body { font-family: sans-serif; padding: 20px; }
-    #response { margin-top: 20px; white-space: pre-wrap; }
-  </style>
 </head>
 <body>
-  <img src="assets/photo (1).png" width="100%" alt="AI 導覽員">
-  <input id="question" type="text" style="max-width: 80%;">
-  <button style="max-width: 20%;" onclick="askAI()">送出</button>
-  <p id="response">我是這次專題展的展場AI，我可以提供各組專題的資訊，請指定第幾組來？</p>
+  <div id="container" class="flex-container">
+    <div id="left-column">
+        <img  src="assets/images/yolochan.png" alt="悠鹿醬">
+    </div>
+    <div id="right-column">
+        <div id="chat-box">
+            <input type="text" id="message" placeholder="輸入第某組介紹專題內容">
+            <button id="btn" onclick="askAI()">傳送</button>
+        </div>
+        <p id="response">我是這次專題展的展場AI，我叫悠鹿醬，悠鹿醬可以提供各組專題的資訊，請指定第幾組來？</p>
+    </div>
+    </div>
+    <audio id="myAudio"></audio>
 
   <script>
     async function askAI() {
-      const question = document.getElementById("question").value;
+      const message = document.getElementById("message").value;
       document.getElementById("response").textContent = "⏳ 讓我思考一下...\n";
-      const res = await fetch(" https://04a2-118-163-223-51.ngrok-free.app/ask", {
+      const res = await fetch("https://a2f2-118-163-223-51.ngrok-free.app/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question })
+        body: JSON.stringify({ message })
       });
       const data = await res.json();
       document.getElementById("response").textContent = data.reply;
-    }
+    };
+    var image = document.querySelector("#left-column img");
+    image.addEventListener("click", function () {
+        var responseText = document.getElementById("response");
+        var image = document.querySelector("#left-column img");
+        responseText.textContent = "";
+        typeText("不要點我，請在對話框輸入文字與我交流", responseText, 0);
+        image.src = originalImageSrc; 
+        if (audioElement) {audioElement.pause();audioElement = null;}
+    });
+    document.getElementById("message").addEventListener("keyup", function(event) {
+      if (event.key === "Enter") { 
+        askAI(); 
+      }
+    });
   </script>
 </body>
 </html>
