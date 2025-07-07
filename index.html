@@ -29,7 +29,7 @@
     async function askAI() {
       const message = document.getElementById("message").value;
       document.getElementById("response").textContent = "⏳ 我需要20秒左右的時間思考...\n";
-      const res = await fetch("http://yolochan.mooo.com:9090/ask", {
+      const res = await fetch("http://yolochan.mooo.com:9090/wIHNpcZkTC", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message })
