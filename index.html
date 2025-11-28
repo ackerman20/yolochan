@@ -1,68 +1,26 @@
-<!DOCTYPE html>
-<html lang="zh">
+<html>
 <head>
-  <title>悠鹿醬</title>
+    <title>悠鹿醬唱歌</title>
 	<meta name="title" content="悠鹿醬唱歌">
 	<meta name="description" content="展現唱歌">
-  <meta property="og:url" content="https://ackerman20.github.io/yolochan/index.html" />
+    <meta property="og:url" content="https://ackerman20.github.io/yolochan/index.html" />
 	<meta property="og:image" content="https://ackerman20.github.io/yolochan/assets/image/yolochan.png" />
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  <meta charset="UTF-8">
-  <title> AI </title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <div id="container" class="flex-container">
-    <div id="left-column">
-        <img  src="assets/images/yolochan.png" alt="悠鹿醬">
-    </div>
-    <div id="right-column">
-        <div id="chat-box">
-            <input type="text" id="message" placeholder="在這裡輸入文字">
-            <button id="btn" onclick="askAI()">傳送</button>
+    <div id="container" class="flex-container">
+        <div id="left-column">
+            <img  src="assets/image/yolochan.png" alt="悠鹿醬">
         </div>
-        <p id="response">不知道要吃什麼嗎，就由悠鹿醬來推薦給你吧~</p>
-    </div>
-    </div>
+        <div id="right-column">
+            <div id="chat-box">
+                <input type="text" id="message" placeholder="輸入文字與我互動吧">
+                <button id="btn" onclick="sendMessage()">傳送</button>
+            </div>
+            <p id="response">不知道要吃什麼嗎，就由悠鹿醬來推薦給你吧~</p>
+            <p id="lyrics"></p>
+        </div>
+        </div>
+    <script src="script.js"></script>
     <audio id="myAudio"></audio>
-
-  <script>
-    async function askAI() {
-      const message = document.getElementById("message").value;
-      document.getElementById("response").textContent = "⏳ 我需要20秒左右的時間思考...\n";
-      const res = await fetch("https://83f7-118-163-223-53.ngrok-free.app/tRTnifffmF", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message })
-      });
-      const data = await res.json();
-      document.getElementById("response").textContent = data.reply;
-    };
-    function typeText(text, element, index) {
-        if (index < text.length) {
-            element.textContent = text.substring(0, index) + "█";
-            var randomDelay = Math.floor(Math.random() * 300);
-            setTimeout(function() {
-                typeText(text, element, index + 1);
-            }, randomDelay);
-        } else {
-            element.textContent = text;
-        }
-    }
-    var image = document.querySelector("#left-column img");
-    image.addEventListener("click", function () {
-        var responseText = document.getElementById("response");
-        var image = document.querySelector("#left-column img");
-        responseText.textContent = "";
-        typeText("不要點我，請在對話框輸入文字與我交流", responseText, 0);
-        image.src = originalImageSrc; 
-        if (audioElement) {audioElement.pause();audioElement = null;}
-    });
-    document.getElementById("message").addEventListener("keyup", function(event) {
-      if (event.key === "Enter") { 
-        askAI(); 
-      }
-    });
-  </script>
-</body>
 </html>
-
