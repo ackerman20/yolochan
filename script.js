@@ -184,7 +184,7 @@ function sendMessage() {
         if (audioElement) {audioElement.pause();audioElement = null;}
         var responses = ["港園牛肉麵","老師ㄟ面","賣噹噹","小籠包","炒飯","米糕城","素食鍋燒","長腳麵","擔仔麵","老蔡魚粥","黑肉水餃","混沌2點","千義","大智","千葉素食","田記豆漿"];
         var randomResponse = responses[Math.floor(Math.random() * responses.length)];
-        typeText('肚子餓了嗎?那可是很緊急呢。悠鹿醬幫你從幼娘狐的餐廳清單選一間吧 ! 現在去吃' + randomResponse + "，趕快趕快", responseText, 0);
+        typeText('肚子餓了嗎?那可是很緊急呢。悠鹿醬從餐廳清單選一間給你，現在去吃' + randomResponse + "，趕快趕快", responseText, 0);
     } else if (["你會唱哪些","唱歌","唱歌一下","你會唱歌嗎","你會唱什麼", "你會唱什麼歌", "那你會唱什麼歌", "那你會唱哪些歌曲","唱歌給悠鹿醬聽","唱首歌","唱首歌來","唱首歌來聽聽","唱歌給悠鹿醬聽","我要聽妳唱歌","悠鹿醬唱歌","悠鹿醬唱歌給悠鹿醬聽","悠鹿醬唱首歌","你會唱什麼歌曲"].includes(userInput)) {
         if (audioElement) {audioElement.pause();audioElement = null;}
         var responses = ["悠鹿醬會唱以下歌曲 : 群青、粉雪、小幸運、煎熬、過火、世界都看見，選一首讓悠鹿醬唱給你聽吧"];
@@ -267,4 +267,5 @@ document.addEventListener("DOMContentLoaded", function() {
     //    document.body.innerHTML = "<h1>此頁面禁止嵌入</h1>";
     //    window.top.location = window.self.location;
     //}
+
 });
